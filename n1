@@ -1,0 +1,6 @@
+- name: Continue workflow only for Issues (not Pull Requests) tagged with JIRA_ISSUE_LABEL
+        if: env.JIRA_CREATE_COMMENT_AUTO == 'true' && env.GITHUB_ISSUE_TYPE == 'issue' && env.GITHUB_ISSUE_HAS_JIRA_ISSUE_LABEL == 'true'
+        env:
+          GITHUB_ISSUE_TYPE: ${{ steps.github_issue_type.outputs.result }}
+          GITHUB_ISSUE_HAS_JIRA_ISSUE_LABEL: ${{ steps.github_issue_has_jira_issue_label.outputs.result }}
+        run: echo "GitHub Issue is tracked on Jira, eligilbe to be commented"
